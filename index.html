@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+        body {
+            font-size: 2.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+                "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+            font-weight: 700;
+        }
+
+        #pressed {
+            color: rgb(91, 188, 122);
+        }
+
+        #keyCodeContainer {
+            height: 150px;
+            width: 120px;
+            padding: 10px;
+            margin: auto;
+            margin-top: 2rem;
+            border-radius: 5px;
+            font-size: 5rem;
+            color: rgb(91, 188, 122);
+            box-shadow: 0 0 5px #888888;
+        }
+
+        #container {
+            display: none;
+            border: 1px solid #888888;
+            padding: 10px;
+            min-width: 650px;
+            margin: auto;
+            box-shadow: 10px 10px 20px #888888;
+            margin-top: 12%;
+        }
+
+        #message {
+            border: 1px solid #888888;
+            padding: 10px;
+            min-width: 650px;
+            margin: auto;
+            box-shadow: 10px 10px 10px #888888;
+            margin-top: 12%;
+        }
+    </style>
+</head>
+
+<body id="mainBody">
+    <div id="message">Press any keyboard key</div>
+    <div id="container">You pressed <span id="pressed"></span></div>
+    <div id="keyCodeContainer" style="display: none;"></div>
+
+    <script>
+        const body = document.getElementById("mainBody");
+        const pressed = document.getElementById("pressed");
+        const message = document.getElementById("message");
+        const container = document.getElementById("container");
+        const keyCodeContainer = document.getElementById("keyCodeContainer");
+        const music = new Audio('./ping-82822.mp3');
+
+
+        let print = (e) => {
+            pressed.innerHTML = "";
+            let data = e.key;
+            let keyCode = e.keyCode;
+            let controlCheck = e.ctrlKey;
+            pressed.innerText = data;
+            keyCodeContainer.innerText = keyCode;
+            // console.log(e);
+            if (controlCheck) {
+                music.play();
+            }
+        };
+
+        let flag = false;
+        body.addEventListener("keyup", (e) => {
+            flag = true;
+            if (flag) {
+                container.style.display = "block";
+                keyCodeContainer.style.display = "block";
+                print(e);
+                message.style.display = "none";
+            }
+        });
+    </script>
+</body>
+
+</html>
